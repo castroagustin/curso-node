@@ -1,1 +1,0 @@
-[{"title":"mate","price":1400,"id":1},{"title":"termo","price":6000,"id":3},{"title":"yerba","price":200,"id":4}]

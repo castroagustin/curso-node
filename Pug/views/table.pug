@@ -1,0 +1,25 @@
+extends layouts/layout
+
+block tabla
+    h1(class="mb-3 mt-5")='Productos'
+    if isNotEmpty
+        table(class="table")
+            thead
+                tr
+                    th(scope="col")='Id' 
+                    th(scope="col")='Titulo'
+                    th(scope="col")='Precio'
+                    th(scope="col")='Imagen'
+                
+            tbody
+                each prod in productosArr
+                    tr
+                        td=prod.id
+                        td=prod.title
+                        td=prod.price
+                        td=prod.thumbnail
+        
+    else
+        div(class="alert alert-danger")='No se encontraron productos'
+
+    a(href='/' class="btn btn-secondary mt-3")='Ir al formulario'

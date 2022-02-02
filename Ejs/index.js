@@ -11,8 +11,15 @@ app.use('/', express.static('public'))
 
 let productosArr = [];
 
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
+app.get('/', (req, res) => {
+    res.render('layouts/index')
+})
+
 productos.get('/', (req, res) => {
-    res.send(productosArr)
+    res.render('layouts/products', { productosArr, isNotEmpty: productosArr.length >= 1 })
 })
 
 productos.get('/:id', (req, res) => {
@@ -23,8 +30,8 @@ productos.get('/:id', (req, res) => {
 productos.post('/', (req, res) => {
     const { title, price, thumbnail } = req.body;
     const id = productosArr.length >= 1 ? productosArr[productosArr.length - 1].id + 1 : 1;
-    productosArr.push({ id, title, price, thumbnail: '' });
-    res.send({ id, title, price, thumbnail })
+    productosArr.push({ id, title, price, thumbnail });
+    res.redirect('/')
 })
 
 productos.put('/:id', (req, res) => {
@@ -48,7 +55,7 @@ productos.delete('/:id', (req, res) => {
     }
 })
 
-app.use('/api/productos', productos);
+app.use('/productos', productos);
 
 const server = app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
