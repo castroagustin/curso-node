@@ -1,0 +1,38 @@
+.prodsTable__img{
+    max-width: 40px;
+    max-height: 40px;
+}
+
+.container{
+    max-width: 900px;
+}
+
+#mensajesContainer{
+    height: 200px;
+    background-color: #e6e6e6;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 1.1rem;
+    overflow-y: scroll;
+}
+
+.message-mail{
+    font-weight: 700;
+    color: #314fd8;
+}
+
+.message-fyh{
+    color: #be3b3b;
+}
+
+.message-text{
+    font-style: italic;
+    color: #3f9e36;
+}
+
+@media (max-width: 700px) {
+    #mensajesContainer{
+        font-size: 0.9rem;
+    }
+}
