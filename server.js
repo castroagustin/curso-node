@@ -27,7 +27,7 @@ class Contenedor {
     }
     add = (prod) => {
         const data = this.getAll();
-        const id = data[data.length - 1].id + 1;
+        const id = prod.id || data[data.length - 1].id + 1;
         const timestamp = Date.now();
         prod = { id, timestamp, ...prod }
         data.push(prod);
@@ -55,10 +55,10 @@ class Contenedor {
             const index = data.indexOf(selectedProd);
             console.log(index);
 
-            selectedProd.title = title;
-            selectedProd.price = price;
-            selectedProd.stock = stock;
-            selectedProd.thumbnail = thumbnail;
+            selectedProd.title = title || selectedProd.title;
+            selectedProd.price = price || selectedProd.price;
+            selectedProd.stock = stock || selectedProd.stock;
+            selectedProd.thumbnail = thumbnail || selectedProd.thumbnail;
             data[index] = selectedProd;
 
             this.save(data)
@@ -154,7 +154,7 @@ carrito.post('/:id/productos', (req, res) => {
     const id = Number(req.params.id);
     const prod = req.body;
     const data = cart.getAll();
-    const selectedCart = data.find(prod => prod.id === id);;
+    const selectedCart = data.find(prod => prod.id === id);
     if (selectedCart) {
         const index = data.indexOf(selectedCart);
         selectedCart.products.push(prod);
@@ -162,7 +162,9 @@ carrito.post('/:id/productos', (req, res) => {
         cart.save(data);
         res.send({ mensaje: `producto agregado correctamente al carrito (id: ${id})` });
     } else {
-        res.send({ mensaje: `el carrito (id: ${id}) no existe` });
+        const newCart = { id: id, products: prod };
+        cart.add(newCart);
+        res.send({ mensaje: `el carrito (id: ${id}) fue creado correctamente` });
     }
 })
 carrito.delete('/:id/productos/:id_prod', (req, res) => {

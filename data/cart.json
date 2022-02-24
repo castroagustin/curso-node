@@ -18,6 +18,10 @@
                 "price": 870,
                 "stock": 24,
                 "thumbnail": "https://cdn3.iconfinder.com/data/icons/street-food-and-food-trucker-1/64/hamburger-fast-food-patty-bread-128.png"
+            },
+            {
+                "id": 4,
+                "title": "PRUEBA"
             }
         ]
     },
